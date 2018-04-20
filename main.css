@@ -1,0 +1,30 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: sans-serif;
+}
+.product-item {
+  display: flex;
+}
+.product-item:nth-child(even) {
+  background-color: #ccc;
+}
+.product-item-name,
+.product-item-quantity,
+.product-item-price {
+  padding: 5px;
+}
+.menu ul {
+  display: flex;
+  list-style-type: none;
+}
+.menu li {
+  flex-grow: 1;
+}
+.menu a {
+  display: block;
+  padding: 5px;
+  text-align: center;
+}
