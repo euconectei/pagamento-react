@@ -1,0 +1,20 @@
+.form {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-flow: column;
+}
+
+.page {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.page.table {
+  
+}
+
+.table-select {
+  
+}

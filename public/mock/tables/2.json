@@ -1,0 +1,10 @@
+{
+  id: 15,
+  products: [
+    { name: "Refrigerante (16)", quantity: 4, price: 5 },
+    { name: "Pastel", quantity: 6, price: 3 },
+    { name: "Churrasco", quantity: 1, price: 35 },
+  ],
+  done: true,
+  service: false,
+}
