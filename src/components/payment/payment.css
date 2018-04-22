@@ -1,0 +1,11 @@
+.product-item {
+  display: flex;
+}
+.product-item:nth-child(even) {
+  background-color: #ccc;
+}
+.product-item-name,
+.product-item-quantity,
+.product-item-price {
+  padding: 5px;
+}

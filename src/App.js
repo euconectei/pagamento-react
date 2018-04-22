@@ -20,15 +20,13 @@ class App extends Component {
   }
   
   componentWillMount() {
-    fetch('https://demo7964230.mockable.io/stone/tables')
+    fetch('https://condo-4748a.firebaseio.com/stone/table.json')
       .then(
         (res) => res.json(),
         (err) => console.log(err)
       )
       .then(
-        (data) => {
-          this.setState.tables = data;
-        },
+        (tables) => this.setState(() => ({ tables })),
         (err) => console.log(err)
       );
   }
@@ -45,11 +43,11 @@ class App extends Component {
             </ul>
           </nav>
           <main className="content">
-            <Route exact path="/payment-react/" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment-react/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment-react/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment-react/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment-react/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
+            <Route exact path="/" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
           </main>
         </div>
       </Router>
