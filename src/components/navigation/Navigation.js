@@ -6,7 +6,8 @@ import {
   PaymentDone,
   TableSelect,
 } from '../';
-import { routes } from '../../config/'
+import { routes } from '../../config/';
+import './navigation.css';
 
 const Navigation = () => {
   return <Router>
@@ -17,11 +18,10 @@ const Navigation = () => {
         </ul>
       </nav>
       <main className="content">
-        <Route exact path="/" render={props => (<Payment tables={this.state.tables} {...props} />)}/>
-        <Route exact path="/" render={props => (<PaymentDivide tables={this.state.tables} {...props} />)}/>
-        <Route exact path="/" render={props => (<PaymentDone tables={this.state.tables} {...props} />)}/>
-        <Route exact path="/" render={props => (<TableSelect tables={this.state.tables} {...props} />)}/>
-        <Route exact path="/" render={props => (<TableSelect tables={this.state.tables} {...props} />)}/>
+        <Route exact path="/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
+        <Route exact path="/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
+        <Route exact path="/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
+        <Route exact path="/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
       </main>
     </div>
   </Router>;

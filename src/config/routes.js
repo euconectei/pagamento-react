@@ -8,27 +8,27 @@ import {
 const routes = [
   {
     name: "Mesa",
-    path: "/",
+    path: "/pagamento-react/",
     component: TableSelect,
   },
   {
     name: "Mesa",
-    path: "/payment",
+    path: "/pagamento-react/payment",
     component: TableSelect,
   },
   {
     name: "Pedidos",
-    path: "/payment/14",
+    path: "/pagamento-react/payment/14",
     component: Payment,
   },
   {
     name: "Dividir",
-    path: "/payment/14/divide",
+    path: "/pagamento-react/payment/14/divide",
     component: PaymentDivide,
   },
   {
     name: "Concluído",
-    path: "/payment/14/done",
+    path: "/pagamento-react/payment/14/done",
     component: PaymentDone,
   },
 ];

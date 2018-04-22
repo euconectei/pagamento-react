@@ -8,11 +8,7 @@ import {
   TableSelect,
 } from './components';
 import { routes } from './config/';
-// import './App.css';
-
-// import { Navigation } from './components/navigation/'
-// import { TableSelect } from './components/table/';
-// import { Payment } from './components/payment/';
+import './App.css';
 
 // <Redirect to="/payment" />
 class App extends Component {
@@ -24,13 +20,15 @@ class App extends Component {
   }
   
   componentWillMount() {
-    fetch('./mock/tables.json')
+    fetch('https://demo7964230.mockable.io/stone/tables')
       .then(
-        (res) => res.data,
+        (res) => res.json(),
         (err) => console.log(err)
       )
       .then(
-        (data) => this.setState.tables = data,
+        (data) => {
+          this.setState.tables = data;
+        },
         (err) => console.log(err)
       );
   }
@@ -41,14 +39,17 @@ class App extends Component {
         <div>
           <nav className="menu">
             <ul>
-              { routes.map((route, i) => <li key={i}><Link to={ route.path }>{ route.name }</Link></li>) }
+              { routes.map(
+                  (route, i) => <li key={i}><Link to={ route.path }>{ route.name }</Link></li>
+              )}
             </ul>
           </nav>
           <main className="content">
-            <Route exact path="/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment-react/" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment-react/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment-react/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment-react/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment-react/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
           </main>
         </div>
       </Router>
