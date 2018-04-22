@@ -20,7 +20,7 @@ class App extends Component {
   }
   
   componentWillMount() {
-    fetch('https://condo-4748a.firebaseio.com/stone/table.json')
+    fetch('https://condo-4748a.firebaseio.com/stone/tables.json')
       .then(
         (res) => res.json(),
         (err) => console.log(err)
@@ -43,10 +43,10 @@ class App extends Component {
             </ul>
           </nav>
           <main className="content">
-            <Route exact path="/" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
+            <Route exact path="/" render={(props) => <TableSelect tables={ this.state.tables } />} />
             <Route exact path="/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
             <Route exact path="/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment/:table/divide/:cards" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
             <Route exact path="/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
           </main>
         </div>

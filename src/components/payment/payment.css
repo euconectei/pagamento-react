@@ -1,4 +1,6 @@
-.product-item {
+.product-item,
+.payment-service,
+.payment-total {
   display: flex;
 }
 .product-item:nth-child(even) {
@@ -6,6 +8,35 @@
 }
 .product-item-name,
 .product-item-quantity,
-.product-item-price {
+.product-item-price,
+.payment-service-check,
+.payment-service-label,
+.payment-service-price,
+.payment-total-label,
+.payment-total-price {
   padding: 5px;
+}
+
+.product-item-name,
+.payment-service-label {
+  flex-grow: 6;
+  width: 60%;
+}
+.product-item-price,
+.payment-service-price,
+.payment-total-price {
+  flex-grow: 3;
+  text-align: right;
+  width: 30%;
+}
+.product-item-quantity,
+.payment-service-check {
+  flex-grow: 1;
+  text-align: center;
+  width: 10%;
+}
+.payment-total-label {
+  flex-grow: 7;
+  text-align: center;
+  width: 70%;
 }
