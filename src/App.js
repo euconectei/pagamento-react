@@ -46,7 +46,7 @@ class App extends Component {
             <Route exact path="/" render={(props) => <TableSelect tables={ this.state.tables } />} />
             <Route exact path="/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
             <Route exact path="/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment/:table/divide/:cards" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
+            <Route exact path="/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
             <Route exact path="/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
           </main>
         </div>

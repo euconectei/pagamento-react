@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 import './table-select.css';
 
 class TableSelect extends Component {
@@ -6,26 +8,16 @@ class TableSelect extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      selectedTable: 0,
+      selectedTable: '',
     };
 
     this.handleTableChange = this.handleTableChange.bind(this);
-    this.handleTableSubmit = this.handleTableSubmit.bind(this);
   }
 
-  handleTableChange = (event) => {
-    console.log(event.target.value);
+  handleTableChange(event) {
+
     this.setState({ selectedTable: event.target.value });
   };
-
-  handleTableSubmit = (event) => {
-    event.preventDefault();
-    if (this.state.selectedTable) {
-      window.location = `/payment/${ this.state.selectedTable }`;
-    } else {
-      alert('Selecione uma mesa!');
-    }
-  }
   
   render() {
     return <div className="page table">
@@ -37,7 +29,13 @@ class TableSelect extends Component {
             return (!table.done) ? <option key={i} value={table}>{table}</option> : null;
           })}
         </select>
-        <input type="button" value="Selecionar" onClick={this.handleTableSubmit} />
+        
+        <Link to={{
+          pathname: `/payment/${ this.state.selectedTable }`,
+          state: {
+            tableId: this.state.selectedTable,
+          },
+        }}>Vai</Link>
       </form>
     </div>;
   }
