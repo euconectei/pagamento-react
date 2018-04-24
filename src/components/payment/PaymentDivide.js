@@ -18,8 +18,7 @@ class PaymentDivide extends Component {
   }
 
   componentWillMount() {
-    // let quantity = prompt('Qual a quantidade de cartões?', 1);
-    let quantity = 2;
+    let quantity = prompt('Qual a quantidade de cartões?', 1);
     let valuePerCard = (this.state.total / quantity).toFixed(2);
     for (let i = 0; i < quantity; i++) {
       this.paid.push({value: valuePerCard, done: false});
@@ -41,6 +40,7 @@ class PaymentDivide extends Component {
       const value = parseFloat(cardsValue[i].value);
       paidValue += value;
     }
+    this.setState({paidTotal: paidValue});
   }
 
   onPayDone(event) {
@@ -56,6 +56,7 @@ class PaymentDivide extends Component {
       if (elem.done === false) {
         return arr.indexOf(elem)
       }
+      return false;
     });
     if (paymentDone.length === 0) {
       this.setState({ paymentDone: true });
