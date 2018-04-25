@@ -2,7 +2,7 @@
   "name": "pagamento",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://euconectei.github.io/pagamento-react",
+  "homepage": "https://pagamento-react.herokuapp.com/",
   "dependencies": {
     "gh-pages": "^1.1.0",
     "react": "^16.3.2",
