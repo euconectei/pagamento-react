@@ -50,13 +50,28 @@
 
 .cards-divide {
   display: flex;
+  flex-direction: row;
   flex-flow: column;
   flex-grow: 1;
+  flex-wrap: nowrap;
+  overflow: auto;
   width: 100%;
 }
 
 .payment-card {
   align-items: center;
   display: flex;
+  flex-grow: 1;
   justify-content: center;
+  min-height: min-content;
+}
+.payment-divide-remaining,
+.payment-divide-total {
+  display: block;
+  text-align: right;
+  width: 100%;
+}
+.payment-divide-total {
+  font-size: 1.5rem;
+  font-weight: bold;
 }
