@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { FormatCurrency } from '../format';
 
 class PaymentDivide extends Component {
@@ -18,16 +19,20 @@ class PaymentDivide extends Component {
   }
 
   componentWillMount() {
-    let quantity = prompt('Qual a quantidade de cartões?', 1);
+    let quantity = 0;
+    console.log(typeof quantity);
+    while (!(quantity >= 1 && !isNaN(quantity))) { quantity = parseInt(prompt('Qual a quantidade de cartões?', 1), 10); }
     let valuePerCard = (this.state.total / quantity).toFixed(2);
     for (let i = 0; i < quantity; i++) {
       this.paid.push({value: valuePerCard, done: false});
       this.cards.push(<div key={i} className="payment-card">
-          <div className="payment-card-check">
-            <input type="checkbox" name="payment-card-check" id={`payment-card-check-${i}`} data-target={i} onChange={ this.onPayDone } />
-          </div>
           <div className="payment-card-input">
             <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={valuePerCard} onChange={this.onChangeValue} />
+          </div>
+          <div className="payment-card-check">
+            <label>
+              <input type="checkbox" name="payment-card-check" id={`payment-card-check-${i}`} data-target={i} onChange={ this.onPayDone } /> Pago
+            </label>
           </div>
         </div>);
     }
@@ -71,7 +76,10 @@ class PaymentDivide extends Component {
       </div>
 
       <div className="payment-divide-remaining"><FormatCurrency value={ this.state.total - this.state.paidTotal } /></div>
-      <div className={`payment-divide-total ${(this.state.paymentDone) ? "payment-done" : ""}`}><FormatCurrency value={this.state.total} /></div>
+      <div className={`payment-divide-total ${(this.state.paymentDone) ? "payment-done" : ""}`}>Total: <FormatCurrency value={this.state.total} /></div>
+      <Link className="btn" to={{
+        pathname: `/payment/${ this.table }/done`,
+      }}>Pagar</Link>
     </div>);
 
   };
