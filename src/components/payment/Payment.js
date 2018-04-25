@@ -6,7 +6,7 @@ import { FormatCurrency } from '../format';
 import './payment.css';
 
 class Payment extends Component {
-  
+
   constructor(props) {
     super(props);
     this.state = {
@@ -25,7 +25,7 @@ class Payment extends Component {
     this.handleServiceToggle = this.handleServiceToggle.bind(this);
 
   }
-  
+
   componentWillMount() {
     const url = `https://condo-4748a.firebaseio.com/stone/tables/${ this.table }.json`;
     fetch(url)
@@ -84,7 +84,10 @@ class Payment extends Component {
       </div>
       <Link className="btn" to={{
         pathname: `/payment/${ this.table }/divide`,
-        state: { total: this.total }
+        state: {
+          table: this.table,
+          total: this.total,
+        }
       }}>Pagar</Link>
     </div>;
   }

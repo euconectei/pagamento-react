@@ -1,4 +1,3 @@
-import { Navigation } from './navigation/';
 import {
   Payment,
   PaymentDivide,
@@ -8,7 +7,6 @@ import { ProductItem } from './product/';
 import { TableSelect } from './table/';
 
 export {
-  Navigation,
   Payment,
   PaymentDivide,
   PaymentDone,

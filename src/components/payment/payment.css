@@ -61,17 +61,22 @@
 .payment-card {
   align-items: center;
   display: flex;
-  flex-grow: 1;
   justify-content: center;
   min-height: min-content;
 }
 .payment-divide-remaining,
 .payment-divide-total {
   display: block;
+  font-weight: bold;
   text-align: right;
   width: 100%;
 }
+.payment-divide-remaining{
+  color: #ff6565;
+}
+.payment-divide-remaining.payment-done {
+  color: #96CA46;
+}
 .payment-divide-total {
   font-size: 1.5rem;
-  font-weight: bold;
 }
