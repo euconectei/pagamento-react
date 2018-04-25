@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 
 import {
   Payment,
@@ -7,7 +7,6 @@ import {
   PaymentDone,
   TableSelect,
 } from './components';
-import { routes } from './config/';
 import './App.css';
 
 // <Redirect to="/payment" />
@@ -34,22 +33,13 @@ class App extends Component {
   render() {
     return (
       <Router>
-        <div>
-          <nav className="menu">
-            <ul>
-              { routes.map(
-                  (route, i) => <li key={i}><Link to={ route.path }>{ route.name }</Link></li>
-              )}
-            </ul>
-          </nav>
-          <main className="content">
-            <Route exact path="/" render={(props) => <TableSelect tables={ this.state.tables } />} />
-            <Route exact path="/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
-            <Route exact path="/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
-          </main>
-        </div>
+        <main className="content">
+          <Route exact path="/" render={(props) => <TableSelect tables={ this.state.tables } />} />
+          <Route exact path="/payment" render={(props) => <TableSelect {...props} tables={ this.state.tables } />} />
+          <Route exact path="/payment/:table" render={(props) => <Payment {...props} tables={ this.state.tables } />} />
+          <Route exact path="/payment/:table/divide" render={(props) => <PaymentDivide {...props} tables={ this.state.tables } />} />
+          <Route exact path="/payment/:table/done" render={(props) => <PaymentDone {...props} tables={ this.state.tables } />} />
+        </main>
       </Router>
     );
   }

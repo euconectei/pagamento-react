@@ -2,9 +2,13 @@
 .payment-service,
 .payment-total {
   display: flex;
+  width: 100%;
+}
+.payment-total {
+  padding: 10px;
 }
 .product-item:nth-child(even) {
-  background-color: #ccc;
+  background-color: #dff2cb;
 }
 .product-item-name,
 .product-item-quantity,
@@ -37,6 +41,22 @@
 }
 .payment-total-label {
   flex-grow: 7;
-  text-align: center;
   width: 70%;
+}
+.payment-list {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.cards-divide {
+  display: flex;
+  flex-flow: column;
+  flex-grow: 1;
+  width: 100%;
+}
+
+.payment-card {
+  align-items: center;
+  display: flex;
+  justify-content: center;
 }

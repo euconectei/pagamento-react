@@ -3,12 +3,7 @@
   display: flex;
   justify-content: center;
   flex-flow: column;
-}
-
-.page {
-  align-items: center;
-  display: flex;
-  justify-content: center;
+  flex-grow: 1;
 }
 
 .page.table {

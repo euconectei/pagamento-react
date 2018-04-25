@@ -64,9 +64,11 @@ class PaymentDivide extends Component {
   }
 
   render() {
-    return (<div>
+    return (<div className="page payment-divide">
       <h2>Pagamento</h2>
-      {this.cards}
+      <div className="cards-divide">
+        {this.cards}
+      </div>
 
       <div className="payment-divide-remaining"><FormatCurrency value={ this.state.total - this.state.paidTotal } /></div>
       <div className={`payment-divide-total ${(this.state.paymentDone) ? "payment-done" : ""}`}><FormatCurrency value={this.state.total} /></div>

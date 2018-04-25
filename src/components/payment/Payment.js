@@ -66,28 +66,26 @@ class Payment extends Component {
       this.total = this.subtotal;
     }
 
-    return <div>
+    return <div className="page payment">
       <h2>Histórico de Consumo</h2>
       <div className="payment-list">
         { productItem }
-        <div className="payment-service">
-          <div className="payment-service-check">
-            <input type="checkbox" defaultChecked={this.state.table.service} onChange={this.handleServiceToggle} />
-          </div>
-          <div className="payment-service-label">Serviço</div>
-          <div className="payment-service-price"><FormatCurrency value={ this.serviceTax } /></div>
-        </div>
-        <div className="payment-total">
-          <div className="payment-total-label">Total</div>
-          <div className="payment-total-price"><FormatCurrency value={ this.total } /></div>
-        </div>
-        <div className="action-buttons">
-          <Link to={{
-            pathname: `/payment/${ this.table }/divide`,
-            state: { total: this.total }
-          }}>Pagar</Link>
-        </div>
       </div>
+      <div className="payment-service">
+        <div className="payment-service-check">
+          <input type="checkbox" defaultChecked={this.state.table.service} onChange={this.handleServiceToggle} />
+        </div>
+        <div className="payment-service-label">Serviço</div>
+        <div className="payment-service-price"><FormatCurrency value={ this.serviceTax } /></div>
+      </div>
+      <div className="payment-total">
+        <div className="payment-total-label">Total</div>
+        <div className="payment-total-price"><FormatCurrency value={ this.total } /></div>
+      </div>
+      <Link className="btn" to={{
+        pathname: `/payment/${ this.table }/divide`,
+        state: { total: this.total }
+      }}>Pagar</Link>
     </div>;
   }
 };

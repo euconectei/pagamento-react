@@ -20,9 +20,9 @@ class TableSelect extends Component {
   };
   
   render() {
-    return <div className="page table">
-      <form action={`payment/${this.state.selectedTable}`} id="tableForm" className="form" method="POST">
-        <label htmlFor="tableSelect">Selecione a mesa</label>
+    return <div className="page tables">
+      <form action={`payment/${this.state.selectedTable}`} id="tableForm" className="form">
+        <label htmlFor="tableSelect">Selecione a mesa:</label>
         <select className="table-select" name="tableSelect" id="tableSelect" onChange={ this.handleTableChange } required>
           <option value="">Mesa</option>
           { Object.keys(this.props.tables).map((table, i) => {
@@ -30,13 +30,13 @@ class TableSelect extends Component {
           })}
         </select>
         
-        <Link to={{
-          pathname: `/payment/${ this.state.selectedTable }`,
-          state: {
-            tableId: this.state.selectedTable,
-          },
-        }}>Vai</Link>
       </form>
+      <Link className="btn" to={{
+        pathname: `/payment/${ this.state.selectedTable }`,
+        state: {
+          tableId: this.state.selectedTable,
+        },
+      }}>Continuar</Link>
     </div>;
   }
 };
