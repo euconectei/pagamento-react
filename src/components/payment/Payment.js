@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { ProductItem } from '../product/';
 import { FormatCurrency } from '../format';
+import { Loading } from '../extras';
 
 import './payment.css';
 
@@ -15,6 +16,7 @@ class Payment extends Component {
         products: [],
         service: false,
       },
+      isLoading: true,
     };
 
     this.serviceTax = 0;
@@ -34,7 +36,12 @@ class Payment extends Component {
         (err) => console.log(err)
       )
       .then(
-        (table) => this.setState(() => ({ table })),
+        (table) => {
+          this.setState(() => ({ 
+            table,
+            isLoading: false,
+          }));
+        },
         (err) => console.log(err)
       );
   };
@@ -66,30 +73,34 @@ class Payment extends Component {
       this.total = this.subtotal;
     }
 
-    return <div className="page payment">
-      <h2>Histórico de Consumo</h2>
-      <div className="payment-list">
-        { productItem }
-      </div>
-      <div className="payment-service">
-        <div className="payment-service-check">
-          <input type="checkbox" defaultChecked={this.state.table.service} onChange={this.handleServiceToggle} />
+    return (this.state.isLoading) ? (
+      <div className="page"><Loading /></div>
+    ) : (
+      <div className="page payment">
+        <h2>Histórico de Consumo</h2>
+        <div className="payment-list">
+          { productItem }
         </div>
-        <div className="payment-service-label">Serviço</div>
-        <div className="payment-service-price"><FormatCurrency value={ this.serviceTax } /></div>
+        <div className="payment-service">
+          <div className="payment-service-check">
+            <input type="checkbox" defaultChecked={this.state.table.service} onChange={this.handleServiceToggle} />
+          </div>
+          <div className="payment-service-label">Serviço</div>
+          <div className="payment-service-price"><FormatCurrency value={ this.serviceTax } /></div>
+        </div>
+        <div className="payment-total">
+          <div className="payment-total-label">Total</div>
+          <div className="payment-total-price"><FormatCurrency value={ this.total } /></div>
+        </div>
+        <Link className="btn" to={{
+          pathname: `/payment/${ this.table }/divide`,
+          state: {
+            table: this.table,
+            total: this.total,
+          }
+        }}>Pagar</Link>
       </div>
-      <div className="payment-total">
-        <div className="payment-total-label">Total</div>
-        <div className="payment-total-price"><FormatCurrency value={ this.total } /></div>
-      </div>
-      <Link className="btn" to={{
-        pathname: `/payment/${ this.table }/divide`,
-        state: {
-          table: this.table,
-          total: this.total,
-        }
-      }}>Pagar</Link>
-    </div>;
+    );
   }
 };
 

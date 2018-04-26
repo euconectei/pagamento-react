@@ -8,7 +8,7 @@ class PaymentDivide extends Component {
 
     this.state = {
       paymentDone: false,
-      paidRemaining: this.props.history.location.state.total,
+      paidRemaining: 0,
       total: this.props.history.location.state.total,
     };
     this.cards = [];
@@ -26,7 +26,7 @@ class PaymentDivide extends Component {
       this.paid.push({value: valuePerCard, done: false});
       this.cards.push(<div key={i} className="payment-card">
           <div className="payment-card-input">
-            <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={valuePerCard} />
+            <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={valuePerCard} data-target={i} pattern="\d*" />
           </div>
           <div className="payment-card-check">
             <label>
@@ -39,15 +39,29 @@ class PaymentDivide extends Component {
 
   onPayDone(event) {
     const target = event.target.getAttribute('data-target');
-    let paidRemaining = 0;
+    const valueElems = document.querySelectorAll('.payment-card-value');
+    let values = [];
+
+    valueElems.forEach((elem) => {
+      console.log(elem);
+      values.push({
+        done: document.querySelector(`#payment-card-check-${elem.dataset.target}`).checked,
+        value: elem.value,
+      });
+    });
+    console.log(values);
     if (this.paid[target].done) {
+      values[target].done = false;
       this.paid[target].done = false;
       document.querySelector(`#payment-card-value-${target}`).removeAttribute('readonly');
     } else {
+      values[target].done = true;
       this.paid[target].done = true;
       document.querySelector(`#payment-card-value-${target}`).setAttribute('readonly', true);
     }
-    let paymentDone = this.paid.map((elem) => (elem.done === false) ? elem.value : 0);
+
+    let paidRemaining = 0;
+    let paymentDone = values.map((elem) => (elem.done === true) ? elem.value : 0);
     paidRemaining = paymentDone.reduce((acc, cur, i) => parseFloat(acc) + parseFloat(cur));
     this.setState({
       paidRemaining: paidRemaining,
@@ -68,7 +82,7 @@ class PaymentDivide extends Component {
         {this.cards}
       </div>
       {link}
-      <div className={`payment-divide-remaining ${(this.state.paidRemaining === 0) ? "payment-done" : ""}`}>Restante: <FormatCurrency value={ this.state.paidRemaining } /></div>
+      <div className={`payment-divide-remaining ${(this.state.total === this.state.paidRemaining) ? "payment-done" : ""}`}>Restante: <FormatCurrency value={ this.state.total - this.state.paidRemaining } /></div>
       <div className="payment-divide-total">Total: <FormatCurrency value={this.state.total} /></div>
     </div>);
   };
