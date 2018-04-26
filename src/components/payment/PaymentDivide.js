@@ -9,7 +9,7 @@ class PaymentDivide extends Component {
     this.state = {
       paymentDone: false,
       paidRemaining: 0,
-      total: this.props.history.location.state.total,
+      total: Math.floor(this.props.history.location.state.total*100)/100,
     };
     this.cards = [];
     this.paid = [];
@@ -21,12 +21,17 @@ class PaymentDivide extends Component {
   componentWillMount() {
     let quantity = 0;
     while (!(quantity >= 1 && !isNaN(quantity))) { quantity = parseInt(prompt('Qual a quantidade de cartões?', 1), 10); }
-    let valuePerCard = Math.floor(this.state.total / quantity * 100)/100;
+    let valuePerCard = Math.floor(this.state.total/quantity*100)/100;
     for (let i = 0; i < quantity; i++) {
       this.paid.push({value: valuePerCard, done: false});
       this.cards.push(<div key={i} className="payment-card">
           <div className="payment-card-input">
-            <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={(i === quantity-1) ? (valuePerCard+((this.state.total*100)%quantity)/100).toFixed(2) : (valuePerCard).toFixed(2)} data-target={i} pattern="\d*" />
+            <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={(i === (quantity-1)) ? (
+                (this.state.total-(valuePerCard*(quantity-1))).toFixed(2)
+              ) : (
+                
+                (valuePerCard).toFixed(2)
+              )} data-target={i} pattern="\d*" />
           </div>
           <div className="payment-card-check">
             <label>
