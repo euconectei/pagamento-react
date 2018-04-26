@@ -24,11 +24,13 @@ class PaymentDivide extends Component {
     let valuePerCard = Math.floor(this.state.total / quantity * 100)/100;
     console.log(valuePerCard);
     console.log(this.state.total);
+    console.log(((this.state.total*100)%quantity)/100);
+
     for (let i = 0; i < quantity; i++) {
       this.paid.push({value: valuePerCard, done: false});
       this.cards.push(<div key={i} className="payment-card">
           <div className="payment-card-input">
-            <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={(i === quantity-1) ? (valuePerCard+(this.state.total%quantity)/100).toFixed(2) : (valuePerCard).toFixed(2)} data-target={i} pattern="\d*" />
+            <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={(i === quantity-1) ? (valuePerCard+((this.state.total*100)%quantity)/100).toFixed(2) : (valuePerCard).toFixed(2)} data-target={i} pattern="\d*" />
           </div>
           <div className="payment-card-check">
             <label>
