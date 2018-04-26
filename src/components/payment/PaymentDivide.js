@@ -9,7 +9,7 @@ class PaymentDivide extends Component {
     this.state = {
       paymentDone: false,
       paidRemaining: 0,
-      total: this.props.history.location.state.total,
+      total: parseFloat(this.props.history.location.state.total),
     };
     this.cards = [];
     this.paid = [];
@@ -21,12 +21,12 @@ class PaymentDivide extends Component {
   componentWillMount() {
     let quantity = 0;
     while (!(quantity >= 1 && !isNaN(quantity))) { quantity = parseInt(prompt('Qual a quantidade de cartões?', 1), 10); }
-    let valuePerCard = (this.state.total / quantity).toFixed(2);
+    let valuePerCard = (this.state.total / quantity);
     for (let i = 0; i < quantity; i++) {
       this.paid.push({value: valuePerCard, done: false});
       this.cards.push(<div key={i} className="payment-card">
           <div className="payment-card-input">
-            <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={valuePerCard} data-target={i} pattern="\d*" />
+            <input id={`payment-card-value-${i}`} className="payment-card-value" type="number" defaultValue={(i === quantity-1) ? (valuePerCard + (this.state.total%quantity)/100).toFixed(2) : (valuePerCard).toFixed(2)} data-target={i} pattern="\d*" />
           </div>
           <div className="payment-card-check">
             <label>
@@ -43,13 +43,11 @@ class PaymentDivide extends Component {
     let values = [];
 
     valueElems.forEach((elem) => {
-      console.log(elem);
       values.push({
         done: document.querySelector(`#payment-card-check-${elem.dataset.target}`).checked,
         value: elem.value,
       });
     });
-    console.log(values);
     if (this.paid[target].done) {
       values[target].done = false;
       this.paid[target].done = false;
@@ -69,7 +67,7 @@ class PaymentDivide extends Component {
   }
 
   render() {
-    const link = (this.state.paidRemaining !== 0) ? (
+    const link = (this.state.total !== this.state.paidRemaining) ? (
       <span className="btn">Concluir</span>
     ) : (
       <Link className="btn" to={{
