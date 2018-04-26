@@ -22,10 +22,6 @@ class PaymentDivide extends Component {
     let quantity = 0;
     while (!(quantity >= 1 && !isNaN(quantity))) { quantity = parseInt(prompt('Qual a quantidade de cartões?', 1), 10); }
     let valuePerCard = Math.floor(this.state.total / quantity * 100)/100;
-    console.log(valuePerCard);
-    console.log(this.state.total);
-    console.log(((this.state.total*100)%quantity)/100);
-
     for (let i = 0; i < quantity; i++) {
       this.paid.push({value: valuePerCard, done: false});
       this.cards.push(<div key={i} className="payment-card">
@@ -51,7 +47,6 @@ class PaymentDivide extends Component {
         done: document.querySelector(`#payment-card-check-${elem.dataset.target}`).checked,
         value: elem.value,
       });
-      console.log(elem.value);
     });
     if (this.paid[target].done) {
       values[target].done = false;
@@ -72,7 +67,6 @@ class PaymentDivide extends Component {
   }
   
   render() {
-    console.log(this.state.paidRemaining);
     const link = (this.state.total !== this.state.paidRemaining) ? (
       <span className="btn">Concluir</span>
     ) : (
