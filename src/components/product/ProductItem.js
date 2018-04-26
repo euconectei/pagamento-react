@@ -3,7 +3,6 @@ import { FormatCurrency } from '../format';
 // import './product.css';
 
 const ProductItem = (props) => {
-  console.log(props);
   return <div className= "product-item">
     <div className="product-item-quantity">{ props.product.quantity }</div>
     <div className = "product-item-name">{ props.product.name }</div >
